@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Salut <%= @participation.user.first_name %></h1>
+    <p>
+      Tu t'es inscrit sur theeventbriteproject à l'evenement suivant : <%= @participation.event.title %>.
+    </p>
+    <p>
+      Il aura lieu le <%= @participation.event.start_date %> et durera <%= @participation.event.duration%> mins.
+    </p>
+    <p>
+      Pour accéder à ton espace client, connecte-toi via : <%= @url %>.
+    </p>
+    <p> À très vite sur monsite.fr !
+  </body>
+</html>
