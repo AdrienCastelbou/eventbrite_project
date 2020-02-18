@@ -1,0 +1,12 @@
+<div class = "container mx-auto">
+    <div class="card mx-auto" style="width: 18rem;">
+      <h1 class = "text-center">Profil</h1>
+      <div class="card-body">
+        <h5 class="card-title text-center"><%= current_user.first_name %> <%= current_user.last_name%></h5>
+        <h6 class="card-subtitle mb-2 text-muted text-center">Date d'inscription : <%= current_user.created_at%></h6>
+        <p class="card-text text-center">email : <%= current_user.email%></p>
+        <p class="card-text text-center">description : <%= current_user.description%></p>
+        
+      </div>
+  <%= link_to "Changer de mot de passe et de mail ", edit_user_registration_path , class: "dropdown-item" %>
+    </div>

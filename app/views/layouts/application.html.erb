@@ -9,7 +9,25 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   </head>
-
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <a class="navbar-brand" href="/">The Eventbrite Project</a>
+        <%= link_to "Créer un evenement", "#" %>
+        <%if user_signed_in?%>
+          <%= link_to "Voir le profil", user_path(current_user) %>
+          <%= link_to "Se déconnecter", destroy_user_session_path, method: :delete %>
+        <% else %>
+          <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              S'inscrire / Se connecter
+            </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <%= link_to "S'inscrire", new_user_registration_path , class: "dropdown-item" %>
+              <%= link_to "Se connecter", new_user_session_path, class: "dropdown-item" %></div>
+          </div>
+        <% end %>
+      </div> 
+    </nav>
   <body>
     <%= yield %>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
