@@ -1,1 +1,18 @@
-Yop
+<div class="jumbotron">
+  <h1 class="display-4">The Eventbrite Project</h1>
+  <p class="lead">Bienvenue sur TEP, la plateforme revolutionnant l'evenementiel !</p>
+  <hr class="my-4">
+  <p>Créez vos evenements en un clic</p>
+  <p class="lead">
+    <%= link_to "Créer un evenement", new_event_path, class: "btn btn-primary", role: "button"%>
+  </p>
+</div>
+
+<% @events.each do |event| %>
+      <div class="card">
+        <div class="card-body">
+          <h6 class="card-subtitle mb-2 text-muted text-center"><%= link_to "#{event.admin.first_name}", user_path(event.admin.id)%></h6>
+          <h5 class="card-title text-center"><%= link_to "#{event.title}", event_path(event.id) %>   
+        </div>
+      </div>
+      <% end %>

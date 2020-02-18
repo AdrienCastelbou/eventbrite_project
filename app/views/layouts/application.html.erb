@@ -12,7 +12,7 @@
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container">
         <a class="navbar-brand" href="/">The Eventbrite Project</a>
-        <%= link_to "Créer un evenement", "#" %>
+        <%= link_to "Créer un evenement", new_event_path %>
         <%if user_signed_in?%>
           <%= link_to "Voir le profil", user_path(current_user) %>
           <%= link_to "Se déconnecter", destroy_user_session_path, method: :delete %>
@@ -28,6 +28,27 @@
         <% end %>
       </div> 
     </nav>
+      <% if !flash.alert.nil? %>
+    <div class="mt-4 row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 text-center mt-3">
+      <div class="alert alert-danger alert-dismissible" role="alert">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <%=  flash.alert %>
+      </div>
+    </div>
+    </div>
+
+    <% elsif !flash.notice.nil? %>
+    <div class="mt-4 row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 text-center mt-3">
+      <div class="alert alert-success alert-dismissible" role="alert">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <%=  flash.notice %>
+      </div>
+    </div>
+    <%end%>
   <body>
     <%= yield %>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
