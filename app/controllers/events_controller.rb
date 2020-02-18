@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  before_action :authenticate_user!, only: [:new]
   def index
     @events = Event.all
   end
@@ -17,7 +18,7 @@ class EventsController < ApplicationController
     @event.admin = current_user
     if @event.save
       flash[:notice] = "Post successfully created"
-      redirect_to root_path
+      redirect_to event_path(@event.id)
     else
       render new_event_path
     end

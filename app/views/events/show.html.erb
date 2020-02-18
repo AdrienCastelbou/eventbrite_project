@@ -2,9 +2,9 @@
       <h1  class="mx-auto" style="width: 200px;"><%= @event.title %></h1> 
       <div class="card">
         <div class="card-body mx-auto">
-        <h6 class="card-subtitle mb-2 text-muted"> Auteur : <%= link_to "#{@event.admin.first_name} #{@event.admin.last_name}", user_path(@event.admin.id)%></h6>
+        <h6 class="card-subtitle mb-2 text-muted"> Auteur : <%="#{@event.admin.first_name} #{@event.admin.last_name}"%></h6>
         <p class="card-text"><%= @event.description %></p>
-        <h6 class="card-subtitle mb-2 text-muted"> Débute le : <%= @event.created_at%></h6>
+        <h6 class="card-subtitle mb-2 text-muted"> Débute le : <%= @event.start_date%></h6>
         <h6 class="card-subtitle mb-2 text-muted"> À : <%=  "#{@event.location}" %></h6>
         <h6 class="card-subtitle mb-2 text-muted"> Durée : <%=  "#{@event.duration} mins" %></h6>
         <h6 class="card-subtitle mb-2 text-muted"> Prix : <%=  "#{@event.price} €" %></h6>
