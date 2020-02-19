@@ -13,7 +13,26 @@
           <%= link_to "Modifier l'evenement", edit_event_path(@event.id), class: "btn btn-success"%>
           <a href= "<%#{event_path(@event.id)}%>" class= "btn btn-danger" data-confirm = "Sur ?" data-method= "delete">Supprimer</a>
         <% elsif current_user && current_user != @event.admin%>
-          <%= button_to 'Participer à l\'evenement', event_participations_path(@event), method: :post %>
+          
+          <%= form_tag event_participations_path(@event) do %>
+            <article>
+              <% if flash[:error].present? %>
+                <div id="error_explanation">
+                  <p><%= flash[:error] %></p>
+                </div>
+              <% end %>
+              <label class="amount">
+                <span>Montant: <%=@event.price%>.00 € </span>
+              </label>
+            </article>
+
+            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                    data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                    data-description="A month's subscription"
+                    data-amount= <%=@event.price * 100%>
+                    data-currency= "eur"
+                    data-locale="auto"></script>
+            <% end %>
           <% end %>    
         </div>
       </div>

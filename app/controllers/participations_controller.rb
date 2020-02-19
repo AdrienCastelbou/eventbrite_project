@@ -11,11 +11,33 @@ class ParticipationsController < ApplicationController
   def create
     if already_go_in?
       flash[:alert] = "Vous y etes deja inscrit"
-    else
-      @event.participations.create(user: current_user)
-      redirect_back(fallback_location: events_path)
-      flash[:notice] = "Vous etes bien inscrit"
+      redirect_to event_path(@event.id)
     end
+    
+      @amount = @event.price * 100
+
+      customer = Stripe::Customer.create({
+      email: params[:stripeEmail],
+      source: params[:stripeToken],
+      })
+
+      charge = Stripe::Charge.create({
+      customer: customer.id,
+      amount: @amount,
+      description: 'Rails Stripe customer',
+      currency: 'eur',
+      })
+
+      
+    @event.participations.create(user: current_user)
+    flash[:notice] = "Vous etes bien inscrit"
+    redirect_to event_path(@event.id)
+    
+      begin
+        rescue Stripe::CardError => e
+        flash[:error] = e.message
+        redirect_back(fallback_location: events_path)
+      end
   end
 
   def already_go_in?
