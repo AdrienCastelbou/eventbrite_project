@@ -23,4 +23,25 @@ class EventsController < ApplicationController
       render new_event_path
     end
   end
+
+  def edit
+    @event = Event.find(params[:id])
+  end
+
+  def update
+    @event = Event.find(params[:id])
+    event_params = params.permit(:title, :description, :price, :location, :duration, :start_date)
+  
+  if @event.update(event_params)
+    redirect_to event_path(params[:id]),  :notice => "Le potin a bien été modifié."
+  else
+    redirect_back(fallback_location: event_path)
+  end
+  end
+
+  def destroy
+    @event = Event.find(params[:id])
+    @event.destroy
+    redirect_to root_path
+  end
 end

@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   after_create :welcome_send
-  has_many :participations
+  has_many :participations, dependent: :destroy
   has_many :events, through: :participations
   has_many :organised_events, foreign_key: 'admin_id', class_name: "Event"
        

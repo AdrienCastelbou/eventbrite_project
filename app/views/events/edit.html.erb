@@ -1,0 +1,57 @@
+<div class = "container">
+  <div class = "row">
+    <div class = "col-md-6 offset-md-3">
+    <br><br><br>
+
+
+<%= form_tag event_path, method: "put" do %>
+<h1 class="h3 mb-3 font-weight-normal text-center">Modifier l'event</h1>
+  <div class="form-group">
+      <%= label_tag 'Title' %>
+      <%= text_field_tag 'title', @event.title, class: 'form-control', required: :true  %>
+      <br /> <br />
+  </div>
+  <div class="form-group">
+      <%= label_tag 'Description' %>
+      <%= text_area_tag 'description', @event.description, class: 'form-control', required: :true %>
+      <br /> <br />
+  </div>
+  <div class="form-group">
+      <%= label_tag 'Prix' %>
+      <%= number_field_tag 'price', @event.price, class: 'form-control', required: :true %>
+      <br /> <br />
+  </div>
+  <div class="form-group">
+      <%= label_tag 'Ville' %>
+      <%= text_area_tag 'location', @event.location, class: 'form-control', required: :true %>
+      <br /> <br />
+  </div>
+  <div class="form-group">
+      <%= label_tag 'Date' %>
+      <%= datetime_field_tag 'start_date', @event.start_date, class: 'form-control', required: :true %>
+      <br /> <br />
+  </div>
+  <div class="form-group">
+      <%= label_tag 'Durée en minutes (veuillez choisir un multiple de 5)' %>
+      <%= number_field_tag 'duration', @event.duration, class: 'form-control', required: :true %>
+      <br /> <br />
+  </div>
+  <div class="form-actions">
+      <%= submit_tag "Update Event", class: "btn btn-primary" %>
+  </div>
+<% end %>
+<% if @event.errors.any? %>
+  <div class="alert alert-danger" role="alert">
+  <p>Nous n'avons pas réussi à créer l'event pour la (ou les) raison(s) suivante(s) :</p>
+  <ul>
+    <% @event.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+  </div>
+<% end %>
+
+
+</div>
+</div>
+</div>

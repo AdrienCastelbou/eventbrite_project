@@ -8,9 +8,12 @@
         <h6 class="card-subtitle mb-2 text-muted"> À : <%=  "#{@event.location}" %></h6>
         <h6 class="card-subtitle mb-2 text-muted"> Durée : <%=  "#{@event.duration} mins" %></h6>
         <h6 class="card-subtitle mb-2 text-muted"> Prix : <%=  "#{@event.price} €" %></h6>
+        <h6 class="card-subtitle mb-2 text-muted"> Participants : <%=  "#{@event.users.count} " %></h6>
         <% if current_user == @event.admin%>
           <%= link_to "Modifier l'evenement", edit_event_path(@event.id), class: "btn btn-success"%>
           <a href= "<%#{event_path(@event.id)}%>" class= "btn btn-danger" data-confirm = "Sur ?" data-method= "delete">Supprimer</a>
+        <% elsif current_user && current_user != @event.admin%>
+          <%= button_to 'Participer à l\'evenement', event_participations_path(@event), method: :post %>
           <% end %>    
         </div>
       </div>
