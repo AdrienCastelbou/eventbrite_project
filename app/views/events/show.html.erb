@@ -13,7 +13,6 @@
           <%= link_to "Modifier l'evenement", edit_event_path(@event.id), class: "btn btn-success"%>
           <a href= "<%#{event_path(@event.id)}%>" class= "btn btn-danger" data-confirm = "Sur ?" data-method= "delete">Supprimer</a>
         <% elsif current_user && current_user != @event.admin%>
-          
           <%= form_tag event_participations_path(@event) do %>
             <article>
               <% if flash[:error].present? %>

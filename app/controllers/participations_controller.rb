@@ -12,7 +12,7 @@ class ParticipationsController < ApplicationController
     if already_go_in?
       flash[:alert] = "Vous y etes deja inscrit"
       redirect_to event_path(@event.id)
-    end
+    else
     
       @amount = @event.price * 100
 
@@ -29,15 +29,16 @@ class ParticipationsController < ApplicationController
       })
 
       
-    @event.participations.create(user: current_user)
-    flash[:notice] = "Vous etes bien inscrit"
-    redirect_to event_path(@event.id)
+      @event.participations.create(user: current_user)
+      flash[:notice] = "Vous etes bien inscrit"
+      redirect_to event_path(@event.id)
     
       begin
         rescue Stripe::CardError => e
         flash[:error] = e.message
         redirect_back(fallback_location: events_path)
       end
+    end
   end
 
   def already_go_in?
